@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Diagnóstico Lengua y Comunicación I</title>
+
+<style>
+
+:root{
+    --primario:#1f4e79;
+    --secundario:#3e7065;
+    --fondo:#f4f7fb;
+    --blanco:#ffffff;
+    --gris:#666;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:'Segoe UI', Arial, sans-serif;
+    background:var(--fondo);
+}
+
+header{
+    background:linear-gradient(135deg,var(--primario),var(--secundario));
+    color:white;
+    padding:25px;
+    text-align:center;
+}
+
+.container{
+    max-width:1000px;
+    margin:auto;
+    padding:20px;
+}
+
+.card{
+    background:white;
+    border-radius:14px;
+    padding:20px;
+    margin-bottom:20px;
+    box-shadow:0 2px 8px rgba(0,0,0,.10);
+}
+
+h1,h2,h3{
+    margin-top:0;
+}
+
+label{
+    display:block;
+    margin:8px 0;
+}
+
+input[type=text],
+input[type=date],
+textarea,
+select{
+    width:100%;
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:8px;
+}
+
+textarea{
+    min-height:120px;
+}
+
+.question{
+    padding:15px;
+    margin-bottom:15px;
+    border-left:5px solid var(--primario);
+    background:#fafafa;
+}
+
+.btn{
+    background:var(--primario);
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.btn:hover{
+    opacity:.9;
+}
+
+.progress-container{
+    background:#ddd;
+    height:15px;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress-bar{
+    height:100%;
+    width:0%;
+    background:var(--secundario);
+    transition:.3s;
+}
+
+.timer{
+    text-align:right;
+    font-weight:bold;
+    color:var(--primario);
+}
+
+.results{
+    display:none;
+}
+
+.score{
+    font-size:40px;
+    color:var(--primario);
+    font-weight:bold;
+}
+
+.badge{
+    display:inline-block;
+    padding:10px 15px;
+    border-radius:20px;
+    color:white;
+    font-weight:bold;
+}
+
+.avanzado{background:#198754;}
+.satisfactorio{background:#0d6efd;}
+.basico{background:#fd7e14;}
+.apoyo{background:#dc3545;}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,td{
+    border:1px solid #ddd;
+    padding:8px;
+    text-align:center;
+}
+
+@media print{
+
+    .no-print{
+        display:none;
+    }
+
+    body{
+        background:white;
+    }
+
+    .card{
+        box-shadow:none;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Evaluación Diagnóstica</h1>
+    <h2>Lengua y Comunicación I</h2>
+</header>
+
+<div class="container">
+
+<div class="card no-print">
+    <div class="timer">
+        Tiempo: <span id="timer">30:00</span>
+    </div>
+
+    <h3>Progreso</h3>
+
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+</div>
+
+<div class="card">
+
+<h3>Datos del estudiante</h3>
+
+<label>Nombre
+<input type="text" id="nombre">
+</label>
+
+<label>Grupo
+<input type="text" id="grupo">
+</label>
+
+<label>Escuela de procedencia
+<input type="text" id="escuela">
+</label>
+
+<label>Fecha
+<input type="date" id="fecha">
+</label>
+
+</div>
+
+<form id="quiz">
+
+<div class="card">
+<h2>Sección I. Comprensión lectora</h2>
+
+<p><strong>Texto:</strong></p>
+
+<p>
+La tecnología forma parte de la vida cotidiana de los jóvenes.
+A través de dispositivos móviles pueden comunicarse, aprender
+y acceder a información de manera inmediata. Sin embargo,
+el uso excesivo de estos recursos puede afectar la concentración
+y el rendimiento escolar si no se utilizan responsablemente.
+</p>
+
+<div class="question">
+1. ¿Cuál es la idea principal?
+<label><input type="radio" name="q1" value="0"> Los jóvenes usan únicamente teléfonos.</label>
+<label><input type="radio" name="q1" value="1"> La tecnología ofrece beneficios y debe usarse responsablemente.</label>
+<label><input type="radio" name="q1" value="0"> Los teléfonos son perjudiciales.</label>
+<label><input type="radio" name="q1" value="0"> La escuela prohíbe la tecnología.</label>
+</div>
+
+<div class="question">
+2. ¿Cuál es una idea secundaria?
+<label><input type="radio" name="q2" value="1"> El uso excesivo puede afectar la concentración.</label>
+<label><input type="radio" name="q2" value="0"> Los jóvenes viven en distintos lugares.</label>
+<label><input type="radio" name="q2" value="0"> Los celulares son costosos.</label>
+</div>
+
+<div class="question">
+3. Propósito del texto:
+<label><input type="radio" name="q3" value="0"> Narrar.</label>
+<label><input type="radio" name="q3" value="1"> Informar y reflexionar.</label>
+<label><input type="radio" name="q3" value="0"> Instruir.</label>
+</div>
+
+<div class="question">
+4. "Sin embargo" expresa:
+<label><input type="radio" name="q4" value="0"> Adición.</label>
+<label><input type="radio" name="q4" value="1"> Contraste.</label>
+<label><input type="radio" name="q4" value="0"> Comparación.</label>
+</div>
+
+<div class="question">
+5. ¿Qué título elegirías?
+<label><input type="radio" name="q5" value="1"> La tecnología y su uso responsable.</label>
+<label><input type="radio" name="q5" value="0"> Historia de internet.</label>
+<label><input type="radio" name="q5" value="0"> Los videojuegos.</label>
+</div>
+</div>
+
+<div class="card">
+<h2>Sección II. Uso de la lengua</h2>
+
+<div class="question">
+6. Elige la oración correcta.
+<label><input type="radio" name="q6" value="1"> Los estudiantes realizaron sus actividades.</label>
+<label><input type="radio" name="q6" value="0"> Los estudiante realizó sus actividades.</label>
+</div>
+
+<div class="question">
+7. Estudié para el examen, ______ obtuve un buen resultado.
+<label><input type="radio" name="q7" value="1"> por lo tanto</label>
+<label><input type="radio" name="q7" value="0"> aunque</label>
+</div>
+
+<div class="question">
+8. ¿Cuál es un párrafo descriptivo?
+<label><input type="radio" name="q8" value="1"> La biblioteca es amplia, silenciosa y luminosa.</label>
+<label><input type="radio" name="q8" value="0"> Considero que leer es importante.</label>
+</div>
+
+<div class="question">
+9. ¿Cuál es un texto instructivo?
+<label><input type="radio" name="q9" value="1"> Manual de una impresora.</label>
+<label><input type="radio" name="q9" value="0"> Poema.</label>
+</div>
+
+<div class="question">
+10. Signo correcto para separar elementos:
+<label><input type="radio" name="q10" value="1"> Coma.</label>
+<label><input type="radio" name="q10" value="0"> Punto.</label>
+</div>
+
+<div class="question">
+11. ¿Cuál es un conector causal?
+<label><input type="radio" name="q11" value="1"> Porque</label>
+<label><input type="radio" name="q11" value="0"> Además</label>
+<label><input type="radio" name="q11" value="0"> Sin embargo</label>
+</div>
+
+<div class="question">
+12. ¿Qué identifica una idea principal?
+<label><input type="radio" name="q12" value="1"> El tema central.</label>
+<label><input type="radio" name="q12" value="0"> Un dato irrelevante.</label>
+</div>
+</div>
+
+<div class="card">
+<h2>Sección III. Tipos de texto</h2>
+
+<div class="question">
+13. Una noticia tiene como finalidad:
+<label><input type="radio" name="q13" value="1"> Informar hechos.</label>
+<label><input type="radio" name="q13" value="0"> Expresar sentimientos únicamente.</label>
+</div>
+
+<div class="question">
+14. ¿Qué elemento es paratextual?
+<label><input type="radio" name="q14" value="1"> Título.</label>
+<label><input type="radio" name="q14" value="0"> Verbo.</label>
+</div>
+
+<div class="question">
+15. Un gráfico dentro de un texto sirve para:
+<label><input type="radio" name="q15" value="1"> Complementar información.</label>
+<label><input type="radio" name="q15" value="0"> Decorar únicamente.</label>
+</div>
+</div>
+
+<div class="card">
+<h2>Sección IV. Oralidad</h2>
+
+<div class="question">
+16. Un elemento paralingüístico es:
+<label><input type="radio" name="q16" value="1"> Entonación.</label>
+<label><input type="radio" name="q16" value="0"> Sustantivo.</label>
+</div>
+
+<div class="question">
+17. Durante una exposición es importante:
+<label><input type="radio" name="q17" value="1"> Hablar con claridad y volumen adecuado.</label>
+<label><input type="radio" name="q17" value="0"> Leer todo sin mirar al público.</label>
+</div>
+</div>
+
+<div class="card">
+<h2>Sección V. Producción escrita</h2>
+
+<p>18. Redacta un párrafo breve explicando por qué la lectura es importante para tu vida académica.</p>
+
+<textarea id="redaccion"></textarea>
+</div>
+
+<div class="card">
+<h2>Sección VI. Hábitos lectores</h2>
+
+<label>19. ¿Con qué frecuencia lees por iniciativa propia?</label>
+<select id="lectura">
+<option>Nunca</option>
+<option>Rara vez</option>
+<option>Algunas veces</option>
+<option>Frecuentemente</option>
+</select>
+
+<br><br>
+
+<label>20. ¿Qué lees con mayor frecuencia?</label>
+<select id="tipoTexto">
+<option>Redes sociales</option>
+<option>Noticias</option>
+<option>Libros</option>
+<option>Revistas</option>
+<option>Otros</option>
+</select>
+
+</div>
+
+<div class="card no-print">
+<button type="button" class="btn" onclick="calificar()">
+Finalizar evaluación
+</button>
+
+<button type="button" class="btn" onclick="window.print()">
+Imprimir resultado
+</button>
+</div>
+
+</form>
+
+<div class="card results" id="resultados">
+
+<h2>Reporte Diagnóstico</h2>
+
+<p><strong>Estudiante:</strong> <span id="rNombre"></span></p>
+
+<div class="score" id="puntajeFinal"></div>
+
+<p id="nivelGeneral"></p>
+
+<h3>Interpretación</h3>
+
+<table>
+<tr>
+<th>Puntaje</th>
+<th>Nivel</th>
+</tr>
+
+<tr>
+<td>90 - 100%</td>
+<td>Avanzado</td>
+</tr>
+
+<tr>
+<td>70 - 89%</td>
+<td>Satisfactorio</td>
+</tr>
+
+<tr>
+<td>50 - 69%</td>
+<td>Básico</td>
+</tr>
+
+<tr>
+<td>0 - 49%</td>
+<td>Requiere apoyo</td>
+</tr>
+
+</table>
+
+<h3>Observaciones automáticas</h3>
+
+<p id="observaciones"></p>
+
+</div>
+
+</div>
+
+<script>
+
+const totalPreguntas = 17;
+
+document.addEventListener("change", actualizarBarra);
+
+function actualizarBarra(){
+
+let respondidas = document.querySelectorAll(
+'input[type=radio]:checked'
+).length;
+
+let porcentaje = (respondidas / totalPreguntas) * 100;
+
+document.getElementById("progressBar")
+.style.width = porcentaje + "%";
+}
+
+function calificar(){
+
+let puntos = 0;
+
+for(let i=1;i<=17;i++){
+
+let respuesta = document.querySelector(
+'input[name="q'+i+'"]:checked'
+);
+
+if(respuesta){
+puntos += parseInt(respuesta.value);
+}
+}
+
+let porcentaje =
+Math.round((puntos / totalPreguntas) * 100);
+
+let nivel="";
+let clase="";
+let observacion="";
+
+if(porcentaje >= 90){
+nivel="AVANZADO";
+clase="avanzado";
+observacion="Demuestra dominio sólido de lectura, escritura y comunicación.";
+}
+else if(porcentaje >= 70){
+nivel="SATISFACTORIO";
+clase="satisfactorio";
+observacion="Cuenta con bases adecuadas para iniciar el bachillerato.";
+}
+else if(porcentaje >= 50){
+nivel="BÁSICO";
+clase="basico";
+observacion="Se recomienda reforzar comprensión lectora y redacción.";
+}
+else{
+nivel="REQUIERE APOYO";
+clase="apoyo";
+observacion="Necesita fortalecer habilidades fundamentales de lectura y escritura.";
+}
+
+document.getElementById("rNombre").innerText =
+document.getElementById("nombre").value;
+
+document.getElementById("puntajeFinal").innerText =
+porcentaje + "%";
+
+document.getElementById("nivelGeneral").innerHTML =
+'<span class="badge '+clase+'">'+nivel+'</span>';
+
+document.getElementById("observaciones").innerText =
+observacion;
+
+document.getElementById("resultados").style.display="block";
+
+window.scrollTo({
+top:document.body.scrollHeight,
+behavior:"smooth"
+});
+}
+
+/* CRONÓMETRO */
+
+let tiempo = 30 * 60;
+
+const reloj = setInterval(function(){
+
+let minutos = Math.floor(tiempo / 60);
+let segundos = tiempo % 60;
+
+document.getElementById("timer").innerText =
+String(minutos).padStart(2,"0")
++ ":" +
+String(segundos).padStart(2,"0");
+
+tiempo--;
+
+if(tiempo < 0){
+
+clearInterval(reloj);
+
+alert(
+"Tiempo terminado. Se calculará el resultado."
+);
+
+calificar();
+}
+
+},1000);
+
+</script>
+
+</body>
+</html>
