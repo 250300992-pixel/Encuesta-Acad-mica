@@ -546,5 +546,35 @@ calificar();
 
 </script>
 
+<script>
+document.getElementById('miFormulario').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const datos = {
+    nombre: document.getElementById('nombre').value,
+    grupo: document.getElementById('grupo').value,
+    escuela: document.getElementById('escuela').value,
+    fecha: document.getElementById('fecha').value,
+    pregunta1: document.getElementById('pregunta1').value,
+    pregunta2: document.getElementById('pregunta2').value,
+    pregunta3: document.getElementById('pregunta3').value,
+    pregunta4: document.getElementById('pregunta4').value,
+    pregunta5: document.getElementById('pregunta5').value
+  };
+
+  fetch('https://script.google.com/a/macros/ucaribe.edu.mx/s/AKfycbxGhbrgADF1lm6PobAg_pBBHtDruiWd0w6FpZj8lfRt10yYiy8dScfrCC9t2gVALS3gUg/exec', {
+    method: 'POST',
+    body: JSON.stringify(datos)
+  })
+  .then(() => {
+    alert('¡Respuestas enviadas correctamente!');
+    document.getElementById('miFormulario').reset();
+  })
+  .catch(() => {
+    alert('Hubo un error al enviar. Intenta de nuevo.');
+  });
+});
+</script>
+
 </body>
 </html>
